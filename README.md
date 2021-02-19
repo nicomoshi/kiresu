@@ -3,7 +3,7 @@ Kiresu - Keyless Face &amp; Hand Gesture Recognition Smart Access System
 
 Requirements:
 
-Install Homebrew: https://brew.sh/
+Install Homebrew: https://brew.sh/  
 Install PyCharm: https://www.jetbrains.com/pycharm/
 
 Installation:
