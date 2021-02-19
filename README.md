@@ -24,6 +24,7 @@ Installation:
   ```brew install cmake```
   9. Install requirements.txt:  
   ```pip3 install -r requirements.txt```
+  10. Run ►. 
 
 # Github Development Breakdown:
 
