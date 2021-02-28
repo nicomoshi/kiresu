@@ -34,5 +34,6 @@ Rodolfo
 - README Instructions for installation
 
 Francesco
-- 
+-
+- Set up firebase project
   
