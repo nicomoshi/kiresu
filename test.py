@@ -1,46 +1,41 @@
 import face_recognition
 import cv2
-import MySQLdb
+import pyrebase
+import requests
 
-# This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
-# other example, but it includes some basic performance tweaks to make things run a lot faster:
-#   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
-#   2. Only detect faces in every other frame of video.
+# Firebase config
+config = {
+  "apiKey": "AIzaSyCL6_tL1MRh4cdwk7QjlogFvlppvIsTM1E",
+  "authDomain": "kiresu-6d765.firebaseapp.com",
+  "databaseURL": "https://kiresu-6d765-default-rtdb.firebaseio.com",
+  "storageBucket": "kiresu-6d765.appspot.com"
+}
 
-# PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
-# OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
-# specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
+# Firebase connection
+firebase = pyrebase.initialize_app(config)
 
-# Get a reference to webcam #0 (the default one)
+# Firebase database instance
+db = firebase.database()
 
+# Get one name and image
+name = db.child("users").child("Rodolfo").get().val().get('name')
+image = db.child("users").child("Rodolfo").get().val().get('image')
+
+# Download image
+response = requests.get(image)
+r = open("Rodolfo.png", "wb")
+r.write(response.content)
+r.close()
+
+# Start camera
 video_capture = cv2.VideoCapture(0)
 
-# initialize database
-db = MySQLdb.connect(host="tendodb.ce5znq518pyu.ap-southeast-2.rds.amazonaws.com",
-                     user="tendo",
-                     passwd="Tendo12345",
-                     db="tendodatabase")
-cur = db.cursor()
+images = []
+images.append(face_recognition.load_image_file('Rodolfo.png'))
+encodings = []
+encodings.append(face_recognition.face_encodings(images[0])[0])
+known_face_names = ['Rodolfo']
 
-cur.execute("SELECT * FROM Students")
-
-number_of_images = cur.rowcount  # total number of faces
-images = [] * (number_of_images+1)  # create an array to store all the images
-encodings = [] * (number_of_images+1)  # create an array to store all the encodings
-
-known_face_names = []  # face names list
-
-# get names from database and introduce into program
-
-
-for row in cur.fetchall():
-    get_name = row[1]
-    # filename = get_name + ".jpg"
-    # doesn't work when students > 5 in database
-    images.append(face_recognition.load_image_file(row[1] + ".jpg"))
-    # store the encoding
-    encodings.append(face_recognition.face_encodings(images[row[0]])[0])
-    known_face_names.append(get_name)
 
 # Initialize some variables
 face_locations = []
@@ -109,4 +104,3 @@ while True:
 # Release handle to the webcam
 video_capture.release()
 cv2.destroyAllWindows()
-db.close()
