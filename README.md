@@ -32,6 +32,9 @@ Rodolfo
 - 
 - Git repo configuration
 - README Instructions for installation
+- Firebase connection
+- Facial Recognition
+- Hand Gesture Recognition
 
 Francesco
 -
