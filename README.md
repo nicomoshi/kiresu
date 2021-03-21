@@ -39,4 +39,6 @@ Rodolfo
 Francesco
 -
 - Set up firebase project
+- Design and test WebApp user interface
+- Building webApp (Started)
   
