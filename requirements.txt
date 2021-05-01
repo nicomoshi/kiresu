@@ -2,3 +2,5 @@ face-recognition
 opencv-python
 pyrebase
 scikit-learn
+tensorflow
+firebase_admin
