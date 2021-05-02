@@ -35,10 +35,15 @@ Rodolfo
 - Firebase connection
 - Facial Recognition
 - Hand Gesture Recognition
+- webapp firebase auth & connection
 
 Francesco
 -
 - Set up firebase project
 - Design and test WebApp user interface
-- Building webApp (Started)
+- Kiresu logo
+- Design style guide
+- Building webApp
+
+ 
   
